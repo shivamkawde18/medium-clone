@@ -1,5 +1,6 @@
 import {
   Box,
+  EditIcon,
   HStack,
   Icon,
   Image,
@@ -11,8 +12,12 @@ import {
   SearchIcon,
 } from "@gluestack-ui/themed";
 import React from "react";
+interface INavbarProps {
+  setCreateBlog: (value: any) => void;
 
-export const Navbar = () => {
+  isCreateBlog: boolean;
+}
+export const Navbar = (props: INavbarProps) => {
   const boder = {
     borderRightWidth: 1,
     borderLeftWidth: 1,
@@ -47,7 +52,11 @@ export const Navbar = () => {
             shadowColor="#242424"
             backgroundColor="#F2F2F2"
           >
-            <InputField placeholder="Search" fontWeight="$normal"  fontSize={"$sm"}/>
+            <InputField
+              placeholder="Search"
+              fontWeight="$normal"
+              fontSize={"$sm"}
+            />
             <InputSlot>
               <InputIcon>
                 {" "}
@@ -55,6 +64,14 @@ export const Navbar = () => {
               </InputIcon>
             </InputSlot>
           </Input>
+          <Pressable
+            onPress={() => {
+              props.setCreateBlog(true);
+            }}
+          >
+            <Icon as={EditIcon} w="$7" h="$7" />
+          </Pressable>
+
           <Pressable>
             <Image
               height={40}

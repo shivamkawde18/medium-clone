@@ -1,0 +1,7 @@
+[
+  {
+    "title": "Prisma with next js",
+    "image": "https://media.istockphoto.com/id/887987150/photo/blogging-woman-reading-blog.jpg?s=612x612&w=0&k=20&c=7SScR_Y4n7U3k5kBviYm3VwEmW4vmbngDUa0we429GA=",
+    "desc": "Prisma is an ORM (Object-Relational Mapping) that provides a high-level database abstraction. It eliminates the need to worry about complex database queries, allowing you to focus on creating models. Models represent the structure of your tables, making it easier to interact with the database. Prisma simplifies database operations by generating a type-safe client, enabling you to perform CRUD operations and execute queries with ease."
+  }
+]
