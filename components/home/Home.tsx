@@ -1,30 +1,35 @@
 "use client";
-import { VStack } from "@gluestack-ui/themed";
-
+import { HStack, VStack } from "@gluestack-ui/themed";
 import { Navbar } from "../navbar";
 import { Sidebar } from "../sidebar";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useContext, useEffect, useState } from "react";
 import makeGraphQLRequest from "@/api/graphQL/request";
-import { userPublicationsQuery } from "@/api/graphQL/queries";
-import Myfeed from "./Myfeed";
+import { DataStore } from "@/app/layout";
+
 
 export const HomeComponent = () => {
   const router = useRouter();
-
+  const pathname = usePathname();
   useEffect(() => {
     if (!localStorage.getItem("username")) router.push("/login");
   }, []);
-  const [isCreateBlog, setCreateBlog] = useState(false);
+  const dataBase =useContext(DataStore)
+  console.log(dataBase,"myyyy")
   return (
     <main>
       <VStack>
-        {
-          isCreateBlog&&<>hii</>
-        }
-        <Navbar isCreateBlog={isCreateBlog} setCreateBlog={setCreateBlog} />
-        <Myfeed />
-        <Sidebar />
+        {pathname === "/login" ? (
+          <></>
+        ) : (
+          <>
+            <Navbar />
+            <HStack justifyContent="flex-end">
+              {" "}
+              <Sidebar  />
+            </HStack>
+          </>
+        )}
       </VStack>
     </main>
   );

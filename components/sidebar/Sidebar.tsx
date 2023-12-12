@@ -1,7 +1,38 @@
-import { Box, HStack, VStack, Text, Image } from "@gluestack-ui/themed";
-import React from "react";
+"use client";
+import { DataStore } from "@/app/layout";
+import { MY_FEEDS, RECOMMENDEED_TOPIC, getCurrentUserBlogs } from "@/app/utils";
+import {
+  Box,
+  HStack,
+  VStack,
+  Text,
+  Image,
+  Pressable,
+} from "@gluestack-ui/themed";
+import { usePathname } from "next/navigation";
+
+import React, { useContext } from "react";
 
 export const Sidebar = () => {
+  const pathname = usePathname();
+  console.log(pathname, "ppppp");
+
+  const getCurrentUserFilteredBlogs = (topic: string) => {
+    const currentUserBlogs = getCurrentUserBlogs();
+    const recommendedBlogs = currentUserBlogs?.filter(
+      (blog: any) => blog.tag.toLowerCase() === topic.toLowerCase()
+    );
+
+    dataBase.setCurrentUserBlogs(recommendedBlogs);
+  };
+
+  const getFeedsFiterBlogs = (topic: string) => {
+    const recommendedBlogs = MY_FEEDS?.filter(
+      (blog: any) => blog.tag.toLowerCase() === topic.toLowerCase()
+    );
+
+    dataBase.setMyfeeds(recommendedBlogs);
+  };
   const boder = {
     borderRightWidth: 1,
     borderLeftWidth: 1,
@@ -14,8 +45,14 @@ export const Sidebar = () => {
     // borderBottomColor: "#ebebeb",
     // width: 500,
   };
+  const dataBase = useContext(DataStore);
+  console.log(dataBase, "kkk");
   return (
-    <VStack position="absolute" right={0} mt={70}>
+    <VStack
+
+    //  position="absolute" right={0}
+    // alignSelf="flex-end"
+    >
       <VStack {...boder} width={500} padding={30} space="xl">
         <Text
           textAlign="center"
@@ -27,71 +64,38 @@ export const Sidebar = () => {
           Recommended topics
         </Text>
         <HStack flexWrap="wrap" space="md">
-          <HStack
-            borderRadius={100}
-            backgroundColor="#F2F2F2"
-            borderColor="#f2f2f2"
-            padding={8}
-            width={"fit-content"}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Text color="#242424" fontSize={"$sm"}>
-              Programming
-            </Text>
-          </HStack>
-          <HStack
-            borderRadius={100}
-            backgroundColor="#F2F2F2"
-            borderColor="#f2f2f2"
-            padding={8}
-            width={"fit-content"}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Text color="#242424" fontSize={"$sm"}>
-              Programming
-            </Text>
-          </HStack>
-          <HStack
-            borderRadius={100}
-            backgroundColor="#F2F2F2"
-            borderColor="#f2f2f2"
-            padding={8}
-            width={"fit-content"}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Text color="#242424" fontSize={"$sm"}>
-              Programming
-            </Text>
-          </HStack>
-          <HStack
-            borderRadius={100}
-            backgroundColor="#F2F2F2"
-            borderColor="#f2f2f2"
-            padding={8}
-            width={"fit-content"}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Text color="#242424" fontSize={"$sm"}>
-              Programming
-            </Text>
-          </HStack>
-          <HStack
-            borderRadius={100}
-            backgroundColor="#F2F2F2"
-            borderColor="#f2f2f2"
-            padding={8}
-            width={"fit-content"}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Text color="#242424" fontSize={"$sm"}>
-              Programming
-            </Text>
-          </HStack>
+          {RECOMMENDEED_TOPIC.map((topic, index) => {
+            return (
+              <HStack
+                key={topic + index}
+                borderRadius={100}
+                backgroundColor="#F2F2F2"
+                borderColor="#f2f2f2"
+                padding={8}
+                width={"fit-content"}
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Pressable
+                  onPress={(e) => {
+                    // const recommendedBlogs = MY_FEEDS?.filter(
+                    //   (blog: any) =>
+                    //     blog.tag.toLowerCase() === topic.toLowerCase()
+                    // );
+
+                    // dataBase.setMyfeeds(recommendedBlogs);
+                    pathname === "/"
+                      ? getFeedsFiterBlogs(topic)
+                      : getCurrentUserFilteredBlogs(topic);
+                  }}
+                >
+                  <Text color="#242424" fontSize={"$sm"}>
+                    {topic}
+                  </Text>
+                </Pressable>
+              </HStack>
+            );
+          })}
         </HStack>
 
         <VStack space="xl">
@@ -127,7 +131,7 @@ export const Sidebar = () => {
               </Text>
             </HStack>
           </HStack>
-       
+
           <HStack alignItems="center" space="md">
             <Image
               height={40}
@@ -259,8 +263,6 @@ export const Sidebar = () => {
         <Text fontSize={"$sm"} color="#1A8917">
           See more suggestions
         </Text>
-
-
       </VStack>
     </VStack>
   );

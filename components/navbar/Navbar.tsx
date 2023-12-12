@@ -11,13 +11,13 @@ import {
   Pressable,
   SearchIcon,
 } from "@gluestack-ui/themed";
-import React from "react";
-interface INavbarProps {
-  setCreateBlog: (value: any) => void;
-
-  isCreateBlog: boolean;
-}
-export const Navbar = (props: INavbarProps) => {
+import React, { useContext } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { DataStore } from "@/app/layout";
+import { MY_FEEDS, getCurrentUserBlogs } from "@/app/utils";
+export const Navbar = () => {
+  const dataBase = useContext(DataStore);
+  const router = useRouter();
   const boder = {
     borderRightWidth: 1,
     borderLeftWidth: 1,
@@ -30,11 +30,35 @@ export const Navbar = (props: INavbarProps) => {
     borderBottomColor: "#ebebeb",
     // width: 500,
   };
+
+  const getFeedsByInputOnHome = (text: string) => {
+    const searchData = MY_FEEDS.filter(
+      (blog: any) =>
+        blog.tag.toLowerCase().includes(text.toLowerCase()) ||
+        blog.desc.toLowerCase().includes(text.toLowerCase()) ||
+        blog.title.toLowerCase().includes(text.toLowerCase())
+    );
+    dataBase.setMyfeeds(searchData);
+  };
+  const getFeedsByInputOnMyBlogs = (text: string) => {
+    const searchData = getCurrentUserBlogs().filter(
+      (blog: any) =>
+        blog.tag.toLowerCase().includes(text.toLowerCase()) ||
+        blog.desc.toLowerCase().includes(text.toLowerCase()) ||
+        blog.title.toLowerCase().includes(text.toLowerCase())
+    );
+    dataBase.setCurrentUserBlogs(searchData);
+  };
+  const pathName = usePathname();
   return (
     <Box {...boder}>
       <HStack justifyContent="space-between" alignItems="center" p={10}>
         <HStack>
-          <Pressable>
+          <Pressable
+            onPress={() => {
+              router.push("/");
+            }}
+          >
             <Image
               height={50}
               width={50}
@@ -56,6 +80,21 @@ export const Navbar = (props: INavbarProps) => {
               placeholder="Search"
               fontWeight="$normal"
               fontSize={"$sm"}
+              onChange={(e) => {
+                console.log(e.currentTarget.value);
+                const text = e.currentTarget.value;
+                // const searchData = MY_FEEDS.filter(
+                //   (blog: any) =>
+                //     blog.tag.toLowerCase().includes(text.toLowerCase()) ||
+                //     blog.desc.toLowerCase().includes(text.toLowerCase()) ||
+                //     blog.title.toLowerCase().includes(text.toLowerCase())
+                // );
+                // dataBase.setMyfeeds(searchData);
+
+                pathName === "/"
+                  ? getFeedsByInputOnHome(text)
+                  : getFeedsByInputOnMyBlogs(text);
+              }}
             />
             <InputSlot>
               <InputIcon>
@@ -66,13 +105,17 @@ export const Navbar = (props: INavbarProps) => {
           </Input>
           <Pressable
             onPress={() => {
-              props.setCreateBlog(true);
+              router.push("/create-blog");
             }}
           >
             <Icon as={EditIcon} w="$7" h="$7" />
           </Pressable>
 
-          <Pressable>
+          <Pressable
+            onPress={() => {
+              router.push("/my-blog");
+            }}
+          >
             <Image
               height={40}
               width={60}
@@ -81,7 +124,12 @@ export const Navbar = (props: INavbarProps) => {
               }}
             ></Image>
           </Pressable>
-          <Pressable>
+          <Pressable
+            onPress={() => {
+              localStorage.removeItem("username");
+              router.push("/login");
+            }}
+          >
             <Image
               height={30}
               width={30}

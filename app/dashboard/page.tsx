@@ -9,6 +9,6 @@ const Dashboard = () => {
   useEffect(() => {
     if (!localStorage.getItem("username")) router.push("/login");
   }, []);
-  return <VStack>shivam</VStack>;
+  return <VStack>Dashboard</VStack>;
 };
 export default Dashboard;

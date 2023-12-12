@@ -28,3 +28,12 @@ export const MY_FEEDS = [
     tag: "React",
   },
 ];
+export const RECOMMENDEED_TOPIC = [
+  "next js",
+  "react",
+  "programming",
+  "life style",
+  "backend",
+  "frontend",
+  "self development",
+];

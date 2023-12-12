@@ -2,7 +2,7 @@
 import { HStack, VStack, Image, Text, Box } from "@gluestack-ui/themed";
 import React, { useEffect, useState } from "react";
 interface IBlogProps {
-  author_name: string;
+  author_name: string|null;
   title: string;
   desc: string;
   image: string;

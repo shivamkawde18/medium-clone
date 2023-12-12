@@ -1,10 +1,16 @@
 "use client";
 import { HStack, VStack, Image, Text, Box } from "@gluestack-ui/themed";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Blog } from "../Blog";
 import { MY_FEEDS } from "@/app/utils";
-export default function Myfeed() {
+import { DataStore } from "@/app/layout";
+
+
+
+export default function Myfeed(props:any) {
   const [feeds, setFeeds] = useState();
+  const dataBase = useContext(DataStore);
+  console.log(dataBase,props,"yeee");
   const boder = {
     // borderRightWidth: 1,
     // borderLeftWidth: 1,
@@ -104,9 +110,9 @@ export default function Myfeed() {
     //     </HStack>
     //   </HStack>
     // </VStack>
-    <VStack overflow="scroll" height={600}>
+    <VStack height={600} position="absolute" top={0} mt={50}>
       <VStack justifyContent="center" space="md" mr={100} ml={120} mt={50}>
-        {MY_FEEDS.map((blog, index) => {
+        {dataBase?.myFeeds?.map((blog: any, index: number) => {
           return (
             <Blog
               image={blog.image}

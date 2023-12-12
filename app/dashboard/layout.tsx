@@ -9,7 +9,6 @@ export default function DashboardLayout({
 }) {
   return (
     <Providers>
-        <HomeComponent/>
       <StyledJsxRegistry>{children}</StyledJsxRegistry>
     </Providers>
   );
