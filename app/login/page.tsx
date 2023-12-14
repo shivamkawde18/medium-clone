@@ -13,8 +13,9 @@ import {
 } from "@gluestack-ui/themed";
 import { LOGIN_SOCIAL_MEDIA } from "../utils";
 import { log } from "console";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
+import { DataStore } from "../layout";
 export default function Home() {
   const router = useRouter();
   const boder = {
@@ -30,6 +31,9 @@ export default function Home() {
     // width: 500,
   };
   const [username, setUserName] = useState("");
+  const dataBase = useContext(DataStore);
+ 
+
   return (
     <main>
       <VStack alignItems="center" justifyContent="center" height="100vh">
@@ -75,6 +79,8 @@ export default function Home() {
               borderColor="#242424"
               onPress={() => {
                 localStorage.setItem("username", username);
+                dataBase.setUserName(username);
+         
                 router.push("/");
               }}
             >

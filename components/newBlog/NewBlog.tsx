@@ -146,6 +146,10 @@ export const NewBlog = () => {
                 desc,
                 username,
                 time: `${hours} ${amOrPm} `,
+                author:{
+                  name:dataBase.userName,
+                  profile:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaj0ckP-Z_Lc9OYo10Pz_LQbxRzqkqhte5qw&usqp=CAU"
+                }
               };
               //  const jsonArr=JSON.parse(localStorage.getItem("allBlogs"))
               // Get the JSON string from localStorage

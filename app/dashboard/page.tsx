@@ -6,9 +6,9 @@ import React, { useEffect } from "react";
 
 const Dashboard = () => {
   const router = useRouter();
-  useEffect(() => {
-    if (!localStorage.getItem("username")) router.push("/login");
-  }, []);
+  // useEffect(() => {
+  //   if (!localStorage.getItem("username")) router.push("/login");
+  // }, []);
   return <VStack>Dashboard</VStack>;
 };
 export default Dashboard;

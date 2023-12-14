@@ -1,5 +1,6 @@
 export const MY_FEEDS = [
   {
+    id: "2323",
     title: "Prisma with next js",
     image:
       "https://media.istockphoto.com/id/887987150/photo/blogging-woman-reading-blog.jpg?s=612x612&w=0&k=20&c=7SScR_Y4n7U3k5kBviYm3VwEmW4vmbngDUa0we429GA=",
@@ -14,6 +15,7 @@ export const MY_FEEDS = [
     tag: "next js",
   },
   {
+    id: "xyz123",
     title: "next js",
     image:
       "https://media.istockphoto.com/id/887987150/photo/blogging-woman-reading-blog.jpg?s=612x612&w=0&k=20&c=7SScR_Y4n7U3k5kBviYm3VwEmW4vmbngDUa0we429GA=",
