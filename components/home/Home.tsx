@@ -2,13 +2,10 @@
 import { HStack, VStack } from "@gluestack-ui/themed";
 import { Navbar } from "../navbar";
 import { Sidebar } from "../sidebar";
-import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect } from "react";
-
+import { usePathname } from "next/navigation";
+import React from "react";
 export const HomeComponent = () => {
-  const router = useRouter();
   const pathname = usePathname();
-
   return (
     <main>
       <VStack>

@@ -13,6 +13,7 @@ export const MyBlogComponent = () => {
   // const filteredList = blogs.filter((blog: any) => blog.username === user);
   const dataBase = useContext(DataStore);
   const router = useRouter();
+  console.log(dataBase?.currentUserBlogs, "om");
   return (
     <main>
       <VStack
@@ -23,15 +24,11 @@ export const MyBlogComponent = () => {
         position="absolute"
         top={0}
       >
-        {dataBase.currentUserBlogs?.map((blog: any) => {
+        {dataBase?.currentUserBlogs?.map((blog: any) => {
           return (
             <Pressable
               onPress={() => {
-                router.push(
-                  `/blog/${blog.id}` +
-                    "?" +
-                    createQueryString("data", JSON.stringify(blog))
-                );
+                router.push(`/blog/${blog.id}`);
               }}
             >
               <Blog

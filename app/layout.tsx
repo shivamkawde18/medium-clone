@@ -3,21 +3,13 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import StyledJsxRegistry from "./registry";
-
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import { createContext, useEffect, useLayoutEffect, useState } from "react";
 import { MY_FEEDS, getCurrentUserBlogs } from "./utils";
 import { useRouter } from "next/navigation";
 import { HomeComponent } from "@/components/home/Home";
-
+import { IDataStoreType } from "@/types";
 const inter = Inter({ subsets: ["latin"] });
-
-export const DataStore = createContext({});
+export const DataStore = createContext<IDataStoreType | undefined>(undefined);
 export default function RootLayout({
   children,
 }: {

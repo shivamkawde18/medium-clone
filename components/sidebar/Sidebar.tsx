@@ -23,7 +23,7 @@ export const Sidebar = () => {
       (blog: any) => blog.tag.toLowerCase() === topic.toLowerCase()
     );
 
-    dataBase.setCurrentUserBlogs(recommendedBlogs);
+    dataBase?.setCurrentUserBlogs(recommendedBlogs);
   };
 
   const getFeedsFiterBlogs = (topic: string) => {
@@ -31,7 +31,7 @@ export const Sidebar = () => {
       (blog: any) => blog.tag.toLowerCase() === topic.toLowerCase()
     );
 
-    dataBase.setMyfeeds(recommendedBlogs);
+    dataBase?.setMyfeeds(recommendedBlogs);
   };
   const boder = {
     borderRightWidth: 1,
@@ -46,7 +46,7 @@ export const Sidebar = () => {
     // width: 500,
   };
   const dataBase = useContext(DataStore);
-  console.log(dataBase, "kkk");
+ 
   return (
     <VStack
 

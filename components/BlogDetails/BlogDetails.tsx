@@ -12,16 +12,24 @@ import {
   DownloadIcon,
   ThreeDotsIcon,
 } from "@gluestack-ui/themed";
-import { useRouter } from "next/navigation";
-import React from "react";
-import { useSearchParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import React, { useContext } from "react";
+import { useSearchParams, usePathname } from "next/navigation";
+import { DataStore } from "@/app/layout";
+import { B } from "@expo/html-elements";
 export const BlogDetailsComponent = () => {
-  const searchParams = useSearchParams();
-  // const blog = router.query.blog;
+  const param = useParams();
 
-  const dataJson = searchParams.get("data");
-  const data = JSON.parse(dataJson ? dataJson : "");
-  console.log(data, "helow");
+  const dataBase = useContext(DataStore);
+
+  const feed: any = dataBase?.myFeeds.filter(
+    (blog: any) => blog.id === param.id
+  );
+
+  const myBlog = dataBase?.currentUserBlogs?.filter(
+    (blog: any) => blog.id === param.id
+  );
+  const blog = feed?.length > 0 ? feed : myBlog;
 
   const boder = {
     borderTopWidth: 1,
@@ -49,7 +57,7 @@ export const BlogDetailsComponent = () => {
         </HStack>
 
         <Text fontSize={"$2xl"} fontWeight="$bold" color="#242424">
-          {data.title}
+          {blog[0]?.title}
         </Text>
 
         <HStack space="md">
@@ -58,15 +66,15 @@ export const BlogDetailsComponent = () => {
             width={40}
             borderRadius={100}
             source={{
-              uri: data.author.profile,
+              uri: blog[0]?.author.profile,
             }}
           />
           <VStack>
             <Text fontSize={"$sm"} color="#242424">
-              {data.author.name}
+              {blog[0]?.author?.name}
             </Text>
             <Text fontSize={"$sm"} color="#242424">
-             {data.time}
+              {blog[0]?.time}
             </Text>
           </VStack>
           {/* <HStack
@@ -120,22 +128,10 @@ export const BlogDetailsComponent = () => {
           height={400}
           width={700}
           source={{
-            uri: data.image,
+            uri: blog[0]?.image,
           }}
         />
-        <Text width={700}>
-          This is an interview experience that happened to my friend not long
-          ago. The interviewer wanted him to implement the Promise.all function.
-          Unfortunately, my friend didn't play well on the spot and couldn't
-          answer the question. After the interview, the interviewer rudely said
-          to him: “Your foundation of JavaScript is not solid enough, and you
-          have less-than-adequate knowledge of many JavaScript principles.” I’m
-          actually puzzled by this behaviour of the interviewer. Does the
-          inability to implement Promise.all mean that the basics have not been
-          mastered? That's strange, don't you think? In what follows, I try to
-          demystify Promise.all and other important Promise methods. So let’s
-          get started
-        </Text>
+        <Text width={700}>{blog[0]?.desc}</Text>
       </VStack>
     </Box>
   );

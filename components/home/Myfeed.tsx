@@ -17,7 +17,7 @@ export default function Myfeed(props: any) {
   const router = useRouter();
   const [feeds, setFeeds] = useState();
   const dataBase = useContext(DataStore);
-  console.log(dataBase, props, "yeee");
+
   const boder = {
     // borderRightWidth: 1,
     // borderLeftWidth: 1,
@@ -30,18 +30,20 @@ export default function Myfeed(props: any) {
     borderBottomColor: "#ebebeb",
     // width: 500,
   };
- 
+
   return (
-    <VStack height={600} position="absolute" top={0} mt={50}>
+    <VStack height={600} position="absolute" top={0} mt={50} overflow="scroll">
       <VStack justifyContent="center" space="md" mr={100} ml={120} mt={50}>
         {dataBase?.myFeeds?.map((blog: any, index: number) => {
           return (
             <Pressable
               onPress={() => {
                 router.push(
-                  `/blog/${blog.id}` +
-                    "?" +
-                    createQueryString("data", JSON.stringify(blog))
+                  `/blog/${blog.id}`
+
+                  // +
+                  //   "?" +
+                  //   createQueryString("data", JSON.stringify(blog))
                 );
               }}
             >

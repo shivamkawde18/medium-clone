@@ -13,6 +13,7 @@ import {
   TextareaInput,
 } from "@gluestack-ui/themed";
 import React, { useContext, useState } from "react";
+import { nanoid } from "nanoid";
 export const NewBlog = () => {
   const dataBase = useContext(DataStore);
   const boder = {
@@ -140,16 +141,18 @@ export const NewBlog = () => {
               hours = hours % 12 || 12;
 
               const blog = {
+                id: nanoid(),
                 title,
                 tag,
                 image,
                 desc,
                 username,
                 time: `${hours} ${amOrPm} `,
-                author:{
-                  name:dataBase.userName,
-                  profile:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaj0ckP-Z_Lc9OYo10Pz_LQbxRzqkqhte5qw&usqp=CAU"
-                }
+                author: {
+                  name: dataBase?.userName,
+                  profile:
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaj0ckP-Z_Lc9OYo10Pz_LQbxRzqkqhte5qw&usqp=CAU",
+                },
               };
               //  const jsonArr=JSON.parse(localStorage.getItem("allBlogs"))
               // Get the JSON string from localStorage
@@ -171,7 +174,7 @@ export const NewBlog = () => {
               setImage("");
               setTitle("");
               const updatedBlogList = getCurrentUserBlogs();
-              dataBase.setCurrentUserBlogs(updatedBlogList);
+              dataBase?.setCurrentUserBlogs(updatedBlogList);
             }}
           >
             <ButtonText fontSize={"$md"} fontWeight="$medium" color="#fff">

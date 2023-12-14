@@ -32,7 +32,6 @@ export default function Home() {
   };
   const [username, setUserName] = useState("");
   const dataBase = useContext(DataStore);
- 
 
   return (
     <main>
@@ -79,8 +78,8 @@ export default function Home() {
               borderColor="#242424"
               onPress={() => {
                 localStorage.setItem("username", username);
-                dataBase.setUserName(username);
-         
+                dataBase?.setUserName(username);
+
                 router.push("/");
               }}
             >
