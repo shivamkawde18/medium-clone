@@ -15,7 +15,20 @@ export const HomeComponent = () => {
           <>
             <Navbar />
             {!pathname.includes("/blog") ? (
-              <HStack justifyContent="flex-end">
+              <HStack
+                $lg={{
+                  justifyContent: "flex-end",
+                }}
+                $sm={{
+                  justifyContent: "center",
+                }}
+                $md={{
+                  justifyContent: "center",
+                }}
+                $base={{
+                  justifyContent: "center",
+                }}
+              >
                 <Sidebar />
               </HStack>
             ) : (

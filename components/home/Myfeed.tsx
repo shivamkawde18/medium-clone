@@ -10,14 +10,48 @@ export default function Myfeed() {
   const dataBase = useContext(DataStore);
 
   return (
-    <VStack height={600} position="absolute" top={0} mt={50} overflow="scroll">
+    <VStack
+      height={600}
+      position="absolute"
+      top={0}
+      mt={50}
+      overflow="scroll"
+      $sm={{ position: "relative", mt: 0, top: 0 }}
+      $base={{ position: "relative", mt: 0, top: 0 }}
+      $md={{ position: "relative", mt: 0, top: 0 }}
+      $lg={{
+        position: "absolute",
+        mt: 50,
+        top: 0,
+      }}
+    >
       <VStack
         justifyContent="center"
         space="md"
         mr={100}
         ml={150}
         mt={50}
+        $lg={{
+          mr: 100,
+          ml: 150,
+          mt: 50,
+        }}
+        $md={{
+          mr: 0,
+          ml: 0,
+          mt: 0,
+        }}
         alignSelf="center"
+        $sm={{
+          mr: 0,
+          ml: 0,
+          mt: 0,
+        }}
+        $base={{
+          mr: 0,
+          ml: 0,
+          mt: 0,
+        }}
       >
         {dataBase?.myFeeds?.map((blog: any, index: number) => {
           return (
