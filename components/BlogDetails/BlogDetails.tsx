@@ -14,9 +14,8 @@ import {
 } from "@gluestack-ui/themed";
 import { useParams, useRouter } from "next/navigation";
 import React, { useContext } from "react";
-import { useSearchParams, usePathname } from "next/navigation";
 import { DataStore } from "@/app/layout";
-import { B } from "@expo/html-elements";
+import { blogDetailBoder } from "@/utils";
 export const BlogDetailsComponent = () => {
   const param = useParams();
 
@@ -31,16 +30,6 @@ export const BlogDetailsComponent = () => {
   );
   const blog = feed?.length > 0 ? feed : myBlog;
 
-  const boder = {
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    // padding: 40,
-    borderLeftColor: "#ebebeb",
-    borderRightColor: "#ebebeb",
-    borderTopColor: "#ebebeb",
-    borderBottomColor: "#ebebeb",
-    // width: 500,
-  };
   return (
     <Box justifyContent="center" alignItems="center" mt={50} mb={50}>
       <VStack space="xl">
@@ -77,26 +66,13 @@ export const BlogDetailsComponent = () => {
               {blog[0]?.time}
             </Text>
           </VStack>
-          {/* <HStack
-            borderRadius={100}
-            borderColor="#242424"
-            borderWidth={1}
-            padding={5}
-            width={70}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Text color="#242424" fontSize={"$sm"}>
-              follow
-            </Text>
-          </HStack> */}
 
           <Text color="#1A8917" fontSize={"$sm"}>
             Follow
           </Text>
         </HStack>
 
-        <HStack {...boder} justifyContent="space-between" p={10}>
+        <HStack {...blogDetailBoder} justifyContent="space-between" p={10}>
           <HStack space="md">
             <HStack alignItems="center">
               <Icon as={MessageCircleIcon} m="$2" w="$6" h="$6" />

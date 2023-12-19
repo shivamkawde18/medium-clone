@@ -1,8 +1,9 @@
 "use client";
+import { blogBorder } from "@/utils";
 import { HStack, VStack, Image, Text, Box } from "@gluestack-ui/themed";
-import React, { useEffect, useState } from "react";
+import React from "react";
 interface IBlogProps {
-  author_name: string|null;
+  author_name: string | null;
   title: string;
   desc: string;
   image: string;
@@ -11,21 +12,8 @@ interface IBlogProps {
   tag: string;
 }
 export const Blog = (props: IBlogProps) => {
-  const boder = {
-    // borderRightWidth: 1,
-    // borderLeftWidth: 1,
-    // borderTopWidth: 1,
-    borderBottomWidth: 1,
-    // padding: 40,
-    borderLeftColor: "#ebebeb",
-    borderRightColor: "#ebebeb",
-    // borderTopColor: "#ebebeb",
-    borderBottomColor: "#ebebeb",
-    // width: 500,
-  };
-
   return (
-    <VStack {...boder} width={600} p={30} space="md">
+    <VStack {...blogBorder} width={600} p={30} space="md">
       <HStack space="md" alignItems="center">
         <Image
           height={30}
@@ -63,7 +51,6 @@ export const Blog = (props: IBlogProps) => {
         <Image
           height={100}
           width={100}
-       
           source={{
             uri: props.image,
           }}
@@ -77,6 +64,7 @@ export const Blog = (props: IBlogProps) => {
             backgroundColor="#F2F2F2"
             borderColor="#f2f2f2"
             padding={8}
+            //@ts-ignore
             width={"fit-content"}
             alignItems="center"
             justifyContent="center"

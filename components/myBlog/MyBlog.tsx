@@ -1,16 +1,11 @@
 "use client";
 
 import React, { useContext } from "react";
-import { Blog } from "../Blog";
+import { Blog } from "../blog/Blog";
 import { Pressable, VStack } from "@gluestack-ui/themed";
 import { DataStore } from "@/app/layout";
-import { createQueryString } from "@/app/utils";
 import { useRouter } from "next/navigation";
 export const MyBlogComponent = () => {
-  // const jsonStoreBlogs = localStorage.getItem("allBlogs");
-  // const blogs = jsonStoreBlogs ? JSON.parse(jsonStoreBlogs) : null;
-  // const user = localStorage.getItem("username");
-  // const filteredList = blogs.filter((blog: any) => blog.username === user);
   const dataBase = useContext(DataStore);
   const router = useRouter();
   console.log(dataBase?.currentUserBlogs, "om");

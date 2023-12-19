@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import StyledJsxRegistry from "./registry";
 import { createContext, useEffect, useLayoutEffect, useState } from "react";
-import { MY_FEEDS, getCurrentUserBlogs } from "./utils";
+import { MY_FEEDS, getCurrentUserBlogs } from "../utils";
 import { useRouter } from "next/navigation";
 import { HomeComponent } from "@/components/home/Home";
 import { IDataStoreType } from "@/types";

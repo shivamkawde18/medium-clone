@@ -1,6 +1,6 @@
 "use client";
 import { DataStore } from "@/app/layout";
-import { getCurrentUserBlogs } from "@/app/utils";
+import { createBlogBorder, getCurrentUserBlogs } from "@/utils";
 import {
   Input,
   VStack,
@@ -16,24 +16,49 @@ import React, { useContext, useState } from "react";
 import { nanoid } from "nanoid";
 export const NewBlog = () => {
   const dataBase = useContext(DataStore);
-  const boder = {
-    borderRightWidth: 1,
-    borderLeftWidth: 1,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    // padding: 40,
-    borderLeftColor: "#ebebeb",
-    borderRightColor: "#ebebeb",
-    borderTopColor: "#ebebeb",
-    borderBottomColor: "#ebebeb",
-    // width: 500,
-  };
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-
   const [image, setImage] = useState("");
   const [tag, setTag] = useState("");
+  const createNewBlog = () => {
+    const username = localStorage.getItem("username");
+    const currentDate = new Date();
+    let hours = currentDate.getHours();
+    // Determine whether it's AM or PM
+    const amOrPm = hours >= 12 ? "PM" : "AM";
+    // Convert to 12-hour format
+    hours = hours % 12 || 12;
 
+    const blog = {
+      id: nanoid(),
+      title,
+      tag,
+      image,
+      desc,
+      username,
+      time: `${hours} ${amOrPm} `,
+      author: {
+        name: dataBase?.userName,
+        profile:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaj0ckP-Z_Lc9OYo10Pz_LQbxRzqkqhte5qw&usqp=CAU",
+      },
+    };
+
+    const storedItemsJSON = localStorage.getItem("allBlogs");
+
+    const storedItems = storedItemsJSON ? JSON.parse(storedItemsJSON) : null;
+
+    localStorage.setItem(
+      "allBlogs",
+      JSON.stringify(storedItems === null ? [blog] : [...storedItems, blog])
+    );
+    setDesc("");
+    setTag("");
+    setImage("");
+    setTitle("");
+    const updatedBlogList = getCurrentUserBlogs();
+    dataBase?.setCurrentUserBlogs(updatedBlogList);
+  };
   return (
     <VStack pl={150} mt={100} position="absolute" top={0}>
       <Box
@@ -42,10 +67,9 @@ export const NewBlog = () => {
         width={500}
         borderRadius={20}
         padding={60}
-        // backgroundColor="red"
         borderColor="#242424"
         shadowColor="red"
-        {...boder}
+        {...createBlogBorder}
         shadowOpacity="$10"
       >
         <Text
@@ -126,55 +150,7 @@ export const NewBlog = () => {
             variant="outline"
             backgroundColor="#1A8917"
             onPress={() => {
-              const username = localStorage.getItem("username");
-              const currentDate = new Date();
-
-              // Get the current hours, minutes, and seconds
-              let hours = currentDate.getHours();
-              const minutes = currentDate.getMinutes();
-              const seconds = currentDate.getSeconds();
-
-              // Determine whether it's AM or PM
-              const amOrPm = hours >= 12 ? "PM" : "AM";
-
-              // Convert to 12-hour format
-              hours = hours % 12 || 12;
-
-              const blog = {
-                id: nanoid(),
-                title,
-                tag,
-                image,
-                desc,
-                username,
-                time: `${hours} ${amOrPm} `,
-                author: {
-                  name: dataBase?.userName,
-                  profile:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaj0ckP-Z_Lc9OYo10Pz_LQbxRzqkqhte5qw&usqp=CAU",
-                },
-              };
-              //  const jsonArr=JSON.parse(localStorage.getItem("allBlogs"))
-              // Get the JSON string from localStorage
-              const storedItemsJSON = localStorage.getItem("allBlogs");
-
-              // Check if the value is not null before parsing
-              const storedItems = storedItemsJSON
-                ? JSON.parse(storedItemsJSON)
-                : null;
-              console.log(storedItems);
-              localStorage.setItem(
-                "allBlogs",
-                JSON.stringify(
-                  storedItems === null ? [blog] : [...storedItems, blog]
-                )
-              );
-              setDesc("");
-              setTag("");
-              setImage("");
-              setTitle("");
-              const updatedBlogList = getCurrentUserBlogs();
-              dataBase?.setCurrentUserBlogs(updatedBlogList);
+              createNewBlog();
             }}
           >
             <ButtonText fontSize={"$md"} fontWeight="$medium" color="#fff">

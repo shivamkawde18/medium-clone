@@ -6,3 +6,12 @@ export interface IDataStoreType {
   userName: any;
   setUserName: any;
 }
+export interface IPeopleYouMayKnowProps {
+  image: string;
+  name: string;
+  designation: string;
+}
+export interface ISocialMediaProps {
+  text: string;
+  socialMediaIcon: string;
+}

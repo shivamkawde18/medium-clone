@@ -1,50 +1,29 @@
 "use client";
-import {
-  HStack,
-  VStack,
-  Image,
-  Text,
-  Box,
-  Pressable,
-} from "@gluestack-ui/themed";
-import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
-import { Blog } from "../Blog";
-import { MY_FEEDS, createQueryString } from "@/app/utils";
+import { VStack, Pressable } from "@gluestack-ui/themed";
+import React, { useContext } from "react";
+import { Blog } from "../blog/Blog";
 import { DataStore } from "@/app/layout";
 import { useRouter } from "next/navigation";
 
-export default function Myfeed(props: any) {
+export default function Myfeed() {
   const router = useRouter();
-  const [feeds, setFeeds] = useState();
   const dataBase = useContext(DataStore);
-
-  const boder = {
-    // borderRightWidth: 1,
-    // borderLeftWidth: 1,
-    // borderTopWidth: 1,
-    borderBottomWidth: 1,
-    // padding: 40,
-    borderLeftColor: "#ebebeb",
-    borderRightColor: "#ebebeb",
-    // borderTopColor: "#ebebeb",
-    borderBottomColor: "#ebebeb",
-    // width: 500,
-  };
 
   return (
     <VStack height={600} position="absolute" top={0} mt={50} overflow="scroll">
-      <VStack justifyContent="center" space="md" mr={100} ml={120} mt={50}>
+      <VStack
+        justifyContent="center"
+        space="md"
+        mr={100}
+        ml={150}
+        mt={50}
+        alignSelf="center"
+      >
         {dataBase?.myFeeds?.map((blog: any, index: number) => {
           return (
             <Pressable
               onPress={() => {
-                router.push(
-                  `/blog/${blog.id}`
-
-                  // +
-                  //   "?" +
-                  //   createQueryString("data", JSON.stringify(blog))
-                );
+                router.push(`/blog/${blog.id}`);
               }}
             >
               <Blog
