@@ -1,7 +1,7 @@
 import React from "react";
 import { VStack, HStack, Image, Text } from "@gluestack-ui/themed";
-import { IRecommendedTopicProps } from "@/types";
-export const RecommendedTopic = (props: IRecommendedTopicProps) => {
+
+export const RecommendedTopic = (props: any) => {
   return (
     <HStack alignItems="center" space="md">
       <Image
