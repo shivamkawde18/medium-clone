@@ -1,20 +1,3 @@
-// import type { Preview } from "@storybook/react";
-
-// const preview: Preview = {
-//   parameters: {
-//     actions: { argTypesRegex: "^on[A-Z].*" },
-//     controls: {
-//       matchers: {
-//         color: /(background|color)$/i,
-//         date: /Date$/i,
-//       },
-//     },
-//   },
-// };
-
-// export default preview;
-
-// import type { Preview } from "@storybook/react";
 import { config } from "@gluestack-ui/config";
 import { GluestackUIProvider } from "@gluestack-ui/themed";
 import React from "react";

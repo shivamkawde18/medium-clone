@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import { Blog } from "../blog/Blog";
 import { DataStore } from "@/app/layout";
 import { useRouter } from "next/navigation";
+import { NoData } from "../common";
 
 export default function Myfeed() {
   const router = useRouter();
@@ -53,26 +54,30 @@ export default function Myfeed() {
           mt: 0,
         }}
       >
-        {dataBase?.myFeeds?.map((blog: any, index: number) => {
-          return (
-            <Pressable
-              onPress={() => {
-                router.push(`/blog/${blog.id}`);
-              }}
-            >
-              <Blog
-                image={blog.image}
-                title={blog.title}
-                desc={blog.desc}
-                tag={blog.tag}
-                profile_pic={blog.author.profile}
-                author_name={blog.author.name}
-                time={blog.time}
-                key={index + blog.title}
-              />
-            </Pressable>
-          );
-        })}
+        {dataBase?.myFeeds?.length > 0 ? (
+          dataBase?.myFeeds?.map((blog: any, index: number) => {
+            return (
+              <Pressable
+                onPress={() => {
+                  router.push(`/blog/${blog.id}`);
+                }}
+              >
+                <Blog
+                  image={blog.image}
+                  title={blog.title}
+                  desc={blog.desc}
+                  tag={blog.tag}
+                  profile_pic={blog.author.profile}
+                  author_name={blog.author.name}
+                  time={blog.time}
+                  key={index + blog.title}
+                />
+              </Pressable>
+            );
+          })
+        ) : (
+          <NoData />
+        )}
       </VStack>
     </VStack>
   );
