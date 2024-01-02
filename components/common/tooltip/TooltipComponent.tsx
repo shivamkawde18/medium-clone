@@ -21,7 +21,7 @@ export const TooltipComponent = (props: ITooltipProps) => {
           <>
             <Pressable
               onPress={() => {
-                console.log("hiiii");
+            
                 props.onPressImage();
               }}
               {...triggerProps}

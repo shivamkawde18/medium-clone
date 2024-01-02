@@ -81,7 +81,6 @@ export const Navbar = () => {
                 fontWeight="$normal"
                 fontSize={"$sm"}
                 onChange={(e: any) => {
-                  console.log(e.currentTarget.value);
                   const text = e.currentTarget.value;
                   pathName === "/"
                     ? getFeedsByInputOnHome(text)
